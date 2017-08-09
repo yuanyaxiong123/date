@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			table {
+				border: solid;
+				border-collapse: collapse;
+			}
+			
+			table td {
+				border: solid;
+				text-align: center;
+			}
+		</style>
+	</head>
+	<body>
+		<table class="riqi">
+			<!--<tr>
+				<td>星期1</td>
+				<td>星期2</td>
+				<td>星期3</td>
+				<td>星期4</td>
+				<td>星期5</td>
+				<td>星期6</td>
+				<td>星期7</td>
+			</tr>		
+			<tr>
+				<td>星期1</td>
+				<td>星期2</td>
+				<td>星期3</td>
+				<td>星期4</td>
+				<td>星期5</td>
+				<td>星期6</td>
+				<td>星期7</td>
+			</tr>
+			<tr>
+				<td>星期1</td>
+				<td>星期2</td>
+				<td>星期3</td>
+				<td>星期4</td>
+				<td>星期5</td>
+				<td>星期6</td>
+				<td>星期7</td>
+			</tr>-->
+		</table>
+	</body>
+	<script src="js/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript">
+		var day = new Date();
+		var y = day.getFullYear();
+		var m = day.getMonth()+1;
+		var yihao = new Date(y, m -1, 1);
+		var week = yihao.getDay();
+		var days = 31;
+		if(m== 2) {
+			if(isrunnian(y)) {
+				days = 29;
+			} else {
+				days = 28;
+			}
+		} else if(m== 4 || m== 6 || m== 9 || m== 11) {
+			days = 30;
+		} else {
+			days = 31;
+		}
+		function xingqi() {
+			var arr = '星期日,星期一,星期二,星期三,星期四,星期五,星期六'.split(',');
+			var html = '<tr>';
+			for(var i = 0; i < arr.length; i++) {
+				html += '<td>' + arr[i] + '</td>'
+			}
+			html += '<tr>';
+			$('.riqi').append(html);
+		}
+		xingqi();
+		function riqi(week, days) {
+			var j = 1;
+			var html = ''
+			while(true) {
+				html += '<tr>';
+				for(var i = 0; i < 7; i++) {
+					if(i < week && j == 1 || j > days) {
+						html += '<td>&nbsp;</td>'
+					} else {
+						html += '<td>' + j + '</td>';
+						j++;
+					}
+				}
+				html += '</tr>';
+				if(j > days) {
+					break;
+				}
+			}
+			$('.riqi').append(html);
+		}
+		riqi(week, days)
+		function isrunnian(num) {
+			return !(num % 4);
+		}
+	</script>
+</html>
